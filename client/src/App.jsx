@@ -9,6 +9,7 @@ import RemoveObject from './pages/RemoveObject'
 import {Community} from './pages/Community'
 import RemoveBackground from './pages/RemoveBackground'
 import ReviewResume from './pages/ReviewResume'
+import Dashboard from './pages/Dashboard'
 
 const App = () => {
   return (
@@ -16,7 +17,7 @@ const App = () => {
       <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/ai' element={<Layout/>}>
-            <Route index element={<Layout/>}/>
+            <Route index element={<Dashboard/>}/>
             <Route path='write-article' element={<WriteArticle/>}/>
             <Route path='blog-titles' element={<BlogTitles/>}/>
             <Route path='generate-images' element={<GenerateImage/>}/>
