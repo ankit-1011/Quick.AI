@@ -1,18 +1,41 @@
 import React, { useState } from 'react'
 import {Hash, Sparkles} from 'lucide-react'
+import { toast } from 'react-hot-toast';
+import Markdown from 'react-markdown'
+import { useAuth } from '@clerk/clerk-react';
+import axios from 'axios';
+
+axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
 const BlogTitles = () => {
 
-  const blogCategories = [
-    'General','Technology','Business','Health','Lifestyle','Education','Travel','Food'
-   ]
+  const blogCategories = ['General','Technology','Business','Health','Lifestyle','Education','Travel','Food']
 
   const [selectedCategory, setSelectedCategory] = useState('General')
   const [input, setInput] = useState('')
 
+  const [loading, setLoading] = useState(false)
+  const [content, setContent] = useState('')
+
+  const { getToken } = useAuth()
+
   const onSubmitHandler = async (e) => {
     e.preventDefault()
-  }
+    try{
+      setLoading(true)
+      const prompt = `Generate a blog title for the keuword ${input} in the category ${selectedCategory}`
+      const {data} = await axios.post('/api/ai/generate-blog-title',{prompt},{headers:{Authorization:`Bearer ${await getToken()}`}})
+
+      if(data.success){
+     setContent(data.content)
+          } else {
+            toast.error(error.message)
+          }
+        } catch (error) {
+          toast.error(error.message)
+       }
+        setLoading(false)
+      }
 
 
 
