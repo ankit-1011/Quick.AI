@@ -26,12 +26,12 @@ const CreationItem = ({ item }) => {
                                     <div className='reset-tw'>
                                         <Markdown>{item.content}</Markdown>
                                     </div>
-                                    </div>
-                                    )
-            }
-                                </div>)}
-                    </div>
-                )
-            }
+                                </div>
+                            )
+                        }
+                    </div>)}
+        </div>
+    )
+}
 
-            export default CreationItem
+export default CreationItem
